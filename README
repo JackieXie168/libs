@@ -1,0 +1,18 @@
+/*
+ * SHORT DESCRIPTION
+ */
+
+libs is generic data structures library, written in C as small replacement to bloated STL.
+It covers following data structures:
+-- _htbl.c, _htbl.h -- hash table;
+-- _listb.c, _listb.h -- double-linked list;
+-- _list.c, _list.h -- single-linked list;
+-- _queue.c, _queue.h -- queue;
+-- _stack.c, _stack.h -- stack (don't be confused with system programming terminology);
+-- _tree.c, _tree.h -- binary tree.
+It also includes implementation of parts of libc's string.h & stdlib.h:
+-- _stddef.h -- common types;
+-- _stdlib.c, _stdlib.h -- search & sort;
+-- _string.c, _string.h -- memory & string operations.
+
+For using libs you need to implement your own compare, allocation & deallocation functions depending on nature of particular types you are working with.

@@ -1,7 +1,4 @@
 *.[oa]
+*.so
 *~*
-*img
 *out
-bblk
-kern
-mkfs
