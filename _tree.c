@@ -6,6 +6,7 @@ void *add_nodet(struct tree *tr, void *data)
 {
 	register void **cur;
 	register int cmp;
+	
 	for (cur = &tr->root; *cur != NULL; ) {
 		cmp = tr->cmp(*cur, data);
 		if (!cmp)
@@ -23,12 +24,13 @@ void rm_nodet(struct tree *tr, void *data)
 {
 	register void **cur;
 	register int cmp;
+	void *l, *r;
+	
 	for (cur = &tr->root; *cur != NULL && (cmp = tr->cmp(*cur, data)); )
 		cur = cmp < 0 ? &right(*cur, tr->roff) : &left(*cur, tr->loff);
 	if (*cur == NULL)
 		return;
 	tr->cnt--;
-	void *l, *r;
 	l = left(*cur, tr->loff);
 	r = right(*cur, tr->roff);
 	tr->free_node(*cur);
@@ -44,9 +46,11 @@ void rm_nodet(struct tree *tr, void *data)
 }
 void rm_tr(struct tree *tr)
 {
+	register void *root;
+	
 	if (tr->root == NULL)
 		return;
-	register void *root = tr->root;
+	root = tr->root;
 	tr->root = left(root, tr->loff);
 	rm_tr(tr);
 	tr->root = right(root, tr->roff);
@@ -60,6 +64,7 @@ void *fnd_nodet(const struct tree *tr, const void *data)
 {
 	register void *cur;
 	register int cmp;
+	
 	for (cur = tr->root; cur != NULL && (cmp = tr->cmp(cur, data)); )
 		cur = cmp < 0 ? right(cur, tr->roff) : left(cur, tr->loff);
 	return cur;
@@ -68,9 +73,11 @@ void *fnd_nodet(const struct tree *tr, const void *data)
 //apply
 void appl_tr(struct tree *tr, void (*fun)(void *, void *), void *arg)
 {
+	register void *root;
+	
 	if (tr->root == NULL)
 		return;
-	register void *root = tr->root;
+	root = tr->root;
 	tr->root = left(root, tr->loff);
 	appl_tr(tr, fun, arg);
 	(*fun)(root, arg);

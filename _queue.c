@@ -6,7 +6,9 @@
 //alloc/dealloc
 int mk_qu(struct queue *q, unsigned int cnt)
 {
-	sz_t bc = cnt * q->off;
+	sz_t bc;
+
+	bc = cnt * q->off;
 	q->base = malloc(bc);
 	if (q->base != NULL) {
 		q->head = q->tail = q->base;
@@ -29,9 +31,11 @@ int push_qu(struct queue *q, void *data)
 			q->tail = q->base;
 		else{
 			sz_t bc, tc;
+			char *newb;
+			
 			tc = (char *)q->tail - (char *)q->base;
 			bc = tc * q->rc;
-			char *newb = realloc(q->base, bc);
+			newb = realloc(q->base, bc);
 			if (newb == NULL)
 				return -1;
 			q->tail = newb + tc;
@@ -40,11 +44,13 @@ int push_qu(struct queue *q, void *data)
 		}
 	} else if (q->head == q->tail && q->head != q->base) {
 		sz_t bh, he, be, bc;
+		char *newb;
+		
 		bh = (char *)q->head - (char *)q->base;
 		he = (char *)q->end - (char *)q->head;
 		be = bh + he;
 		bc = be * q->rc;
-		char *newb = malloc(bc);
+		newb = malloc(bc);
 		if (newb == NULL)
 			return -1;
 		_memcpy(newb, q->head, he);
@@ -63,9 +69,11 @@ int push_qu(struct queue *q, void *data)
 //get
 void *pop_qu(struct queue *q)
 {
+	void *ret;
+	
 	if (q->head == q->tail && q->head == q->base)
 		return NULL;
-	void *ret = q->head;
+	ret = q->head;
 	q->head = (char *)q->head + q->off;
 	if (q->head == q->tail)
 		q->head = q->tail = q->base;
@@ -77,9 +85,11 @@ void *pop_qu(struct queue *q)
 //find
 void *fnd_qu(const struct queue *q, const void *data)
 {
+	register char *cur;
+	
 	if (q->head == q->tail && q->head == q->base)
 		return NULL;
-	register char *cur = q->head;
+	cur = q->head;
 	if (cur >= (char *)q->tail) {
 		for (; cur != q->end; cur += q->off)
 			if (!q->cmp(cur, data))
@@ -93,9 +103,11 @@ void *fnd_qu(const struct queue *q, const void *data)
 }
 void *fndr_qu(const struct queue *q, const void *data)
 {
+	register char *cur;
+	
 	if (q->head == q->tail && q->head == q->base)
 		return NULL;
-	register char *cur = q->tail;
+	cur = q->tail;
 	if (cur < (char *)q->head) {
 		for (cur -= q->off; cur != q->base; cur -= q->off)
 			if (!q->cmp(cur, data))
@@ -111,9 +123,11 @@ void *fndr_qu(const struct queue *q, const void *data)
 //apply
 void appl_qu(const struct queue *q, void (*fun)(void *, void *), void *arg)
 {
+	register char *cur;
+	
 	if (q->head == q->tail && q->head == q->base)
 		return;
-	register char *cur = q->head;
+	cur = q->head;
 	if (cur >= (char *)q->tail) {
 		for (; cur != q->end; cur += q->off)
 			fun(cur, arg);
@@ -124,9 +138,11 @@ void appl_qu(const struct queue *q, void (*fun)(void *, void *), void *arg)
 }
 void applr_qu(const struct queue *q, void (*fun)(void *, void *), void *arg)
 {
+	register char *cur;
+	
 	if (q->head == q->tail && q->head == q->base)
 		return;
-	register char *cur = q->tail;
+	cur = q->tail;
 	if (cur < (char *)q->tail) {
 		for (cur -= q->off; cur != q->base; cur -= q->off)
 			fun(cur, arg);

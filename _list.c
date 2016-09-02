@@ -4,7 +4,9 @@
 //add
 void *add_head(struct list *ls, void *data)
 {
-	void *newh = ls->mk_node(data, ls->head);
+	void *newh;
+
+	newh = ls->mk_node(data, ls->head);
 	if (newh != NULL) {
 		ls->head = newh;
 		ls->cnt++;
@@ -13,29 +15,33 @@ void *add_head(struct list *ls, void *data)
 }
 void *add_tail(struct list *ls, void *data)
 {
+	void *newt;
+	register void *cur;
+	
 	if (ls->head == NULL)
 		return add_head(ls, data);
-	void *newt = ls->mk_node(data, NULL);
+	newt = ls->mk_node(data, NULL);
 	if (newt == NULL)
 		return NULL;
 	ls->cnt++;
-	register void *cur;
 	for (cur = ls->head; next(cur, ls->off) != NULL; cur = next(cur, ls->off))
 		;
 	return next(cur, ls->off) = newt;
 }
 void *add_pos(struct list *ls, void *data, unsigned int pos)
 {
+	void *new;
+	register void *cur;
+	
 	if (!pos)
 		return add_head(ls, data);
 	if (pos > ls->cnt)
 		return NULL;
 	//try alloc (no need loop if fail)
-	void *new = ls->mk_node(data, NULL); //NULL is temporary
+	new = ls->mk_node(data, NULL); //NULL is temporary
 	if (new == NULL)
 		return NULL;
 	ls->cnt++;
-	register void *cur;
 	for (cur = ls->head; --pos; cur = next(cur, ls->off))
 		;
 	next(new, ls->off) = next(cur, ls->off);
@@ -45,22 +51,25 @@ void *add_pos(struct list *ls, void *data, unsigned int pos)
 //rm
 void rm_head(struct list *ls)
 {
+	void *newh;
+	
 	if (ls->head == NULL)
 		return;
-	void *newh = next(ls->head, ls->off);
+	newh = next(ls->head, ls->off);
 	ls->free_node(ls->head);
 	ls->head = newh;
 	ls->cnt--;
 }
 void rm_tail(struct list *ls)
 {
+	register void *cur;
+	
 	if (ls->head == NULL)
 		return;
 	if (next(ls->head, ls->off) == NULL) {
 		rm_head(ls);
 		return;
 	}
-	register void *cur;
 	for (cur = ls->head; next(next(cur, ls->off), ls->off) != NULL;
 	     cur = next(cur, ls->off))
 		;
@@ -70,6 +79,9 @@ void rm_tail(struct list *ls)
 }
 void rm_pos(struct list *ls, unsigned int pos)
 {
+	register void *cur;
+	void *nxt;
+	
 	if (ls->head == NULL)
 		return;
 	if (!pos) {
@@ -78,10 +90,9 @@ void rm_pos(struct list *ls, unsigned int pos)
 	}
 	if (pos >= ls->cnt)
 		return;
-	register void *cur;
 	for (cur = ls->head; --pos; cur = next(cur, ls->off))
 		;
-	void *nxt = next(next(cur, ls->off), ls->off);
+	nxt = next(next(cur, ls->off), ls->off);
 	ls->free_node(next(cur, ls->off));
 	next(cur, ls->off) = nxt;
 	ls->cnt--;
@@ -89,6 +100,7 @@ void rm_pos(struct list *ls, unsigned int pos)
 void rm_node(struct list *ls, void *data)
 {
 	register void *prv, *cur;
+	
 	for (prv = NULL, cur = ls->head; cur != NULL;
 	     prv = cur, cur = next(cur, ls->off))
 		if (!ls->cmp(cur, data)) {
@@ -103,10 +115,11 @@ void rm_node(struct list *ls, void *data)
 }
 void rm_nodes(struct list *ls, void *data)
 {
-	register void *prv = ls->head;
+	register void *prv, *cur;
+
+	prv = ls->head;
 	if (prv == NULL)
 		return;
-	register void *cur;
 	while ((cur = next(prv, ls->off)) != NULL)
 		if (!ls->cmp(cur, data)) {
 			next(prv, ls->off) = next(cur, ls->off);
@@ -120,6 +133,7 @@ void rm_nodes(struct list *ls, void *data)
 void rm_ls(struct list *ls)
 {
 	register void *cur, *nxt;
+	
 	for (cur = ls->head; cur!=NULL; cur = nxt) {
 		nxt = next(cur, ls->off);
 		ls->free_node(cur);
@@ -131,9 +145,10 @@ void rm_ls(struct list *ls)
 //find
 void *fnd_tail(const struct list *ls)
 {
+	register void *cur;
+	
 	if (ls->head == NULL)
 		return NULL;
-	register void *cur;
 	for (cur = ls->head; next(cur, ls->off) != NULL;
 	    cur = next(cur, ls->off))
 		;
@@ -141,9 +156,10 @@ void *fnd_tail(const struct list *ls)
 }
 void *fnd_pos(const struct list *ls, unsigned int pos)
 {
+	register void *cur;
+	
 	if (pos >= ls->cnt)
 		return NULL;
-	register void *cur;
 	for (cur = ls->head; pos--; cur=next(cur, ls->off))
 		;
 	return cur;
@@ -151,6 +167,7 @@ void *fnd_pos(const struct list *ls, unsigned int pos)
 void *fnd_node(const struct list *ls, const void *data)
 {
 	register void *cur;
+
 	for (cur = ls->head; cur != NULL; cur = next(cur, ls->off))
 		if (!ls->cmp(cur, data))
 			return cur;
@@ -161,6 +178,7 @@ void *fnd_node(const struct list *ls, const void *data)
 void appl_ls(const struct list *ls, void (*fun)(void *, void *), void *arg)
 {
 	register void *cur;
+
 	for (cur = ls->head; cur != NULL; cur = next(cur, ls->off))
 		fun(cur, arg);
 }

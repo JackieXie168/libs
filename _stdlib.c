@@ -17,6 +17,7 @@ void *_bsearch(const void *key, const void *mm, sz_t n, sz_t size,
 	register sz_t low, high, mid;
 	register int cm;
 	register void *cur;
+	
 	for (low = 0, high = n - 1; low <= high; ) {
 		mid = (low + high) >> 1;
 		cur = (char *)mm + mid * size;
