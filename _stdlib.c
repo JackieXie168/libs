@@ -11,26 +11,6 @@ void *_lsearch(const void *key, const void *mm, sz_t n, sz_t size,
 			return mm;
 	return NULL;
 }
-void *_bsearch(const void *key, const void *mm, sz_t n, sz_t size,
-	       int (*cmp)(const void *, const void *))
-{
-	register sz_t low, high, mid;
-	register int cm;
-	register void *cur;
-	
-	for (low = 0, high = n - 1; low <= high; ) {
-		mid = (low + high) >> 1;
-		cur = (char *)mm + mid * size;
-		cm = cmp(cur, key);
-		if (cm < 0)
-			low = mid + 1;
-		else if (cm > 0)
-			high = mid - 1;
-		else
-			return cur;
-	}
-	return NULL;
-}
 
 //sort
 void _qsort(void *mm, sz_t n, sz_t sz, int (*cmp)(const void *, const void *))
@@ -46,3 +26,22 @@ void _qsort(void *mm, sz_t n, sz_t sz, int (*cmp)(const void *, const void *))
 	_qsort(mm, (top - (char*)mm) / sz, sz, cmp);
 	_qsort(top + sz, (end - top) / sz - 1, sz, cmp);
 }
+
+void *bsearch(const void *key, const void *mm, sz_t n, sz_t bc, int (*cmp)(const void *, const void *))
+{
+	register sz_t l, h, m;
+	register int c;
+
+	/* ... */
+	for (l = 0, h = n - 1; l < h; ) {
+		m = (l + h) >> 1;
+		c = (*cmp)((char *)mm + m * bc, key);
+		if (c >= 0)
+			h = m;
+		else
+			l = m + 1;
+	}
+	/* ... */
+	cur = (char *)mm + h * bc;
+	return !(*cmp)(cur, key) ? cur : NULL;
+}	
