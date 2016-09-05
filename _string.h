@@ -12,7 +12,7 @@
  * generic memory functions
  *  
  * short description:
- * - memdup/memswp/memxswp are not ANSI:
+ * - memdup/memswp/memxswp are not ANSI;
  * - memdup is dynamic allocator;
  * - memswp swaps using temp buffer;
  * - memxswp swaps using XOR.

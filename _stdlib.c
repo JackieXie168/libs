@@ -1,8 +1,13 @@
-#include <stdlib.h>  //rand()
+/*
+ * stdlib.h implementation
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
+#include <stdlib.h>  /* rand() */
 #include "_stdlib.h" 
-#include "_string.h" //memswp()
+#include "_string.h" /* memswp() */
 
-//search
+/* linear search */
 void *_lsearch(const void *key, const void *mm, sz_t n, sz_t size,
 	       int (*cmp)(const void *,const void *))
 {
@@ -12,7 +17,7 @@ void *_lsearch(const void *key, const void *mm, sz_t n, sz_t size,
 	return NULL;
 }
 
-//sort
+/* quick sort */
 void _qsort(void *mm, sz_t n, sz_t sz, int (*cmp)(const void *, const void *))
 {
 	register char *cur, *top, *end;
@@ -28,6 +33,7 @@ void _qsort(void *mm, sz_t n, sz_t sz, int (*cmp)(const void *, const void *))
 	_qsort(top + sz, (end - top) / sz - 1, sz, cmp);
 }
 
+/* binary search */
 void *bsearch(const void *key, const void *mm, sz_t n, sz_t bc, int (*cmp)(const void *, const void *))
 {
 	register sz_t l, h, m;

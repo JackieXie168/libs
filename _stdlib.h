@@ -1,3 +1,8 @@
+/*
+ * stdlib.h
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #ifndef __STDLIB_H
 #define __STDLIB_H
 
