@@ -15,6 +15,7 @@ void *_memset(void *mm, int c, sz_t bc)
 		*m = c;
 	return mm;
 }
+
 void *_memchr(const void *mm, int c, sz_t bc)
 {
 	register const char *m;
@@ -24,6 +25,7 @@ void *_memchr(const void *mm, int c, sz_t bc)
 			return m;
 	return NULL;
 }
+
 int _memcmp(const void *mm0, const void *mm1, sz_t bc)
 {
 	register const uchar *m0, *m1;
@@ -33,6 +35,7 @@ int _memcmp(const void *mm0, const void *mm1, sz_t bc)
 			return *m0 - *m1;
 	return 0;
 }
+
 void *_memcpy(void *dst, const void *src, sz_t bc)
 {
 #define L sizeof(long)
@@ -47,6 +50,7 @@ void *_memcpy(void *dst, const void *src, sz_t bc)
 	return dst;
 #undef L
 }
+
 void *_memmove(void *dst, const void *src, sz_t bc)
 {
 #define L sizeof(long)
@@ -69,6 +73,7 @@ void *_memmove(void *dst, const void *src, sz_t bc)
 	return dst;
 #undef L
 }
+
 void *_memccpy(void *dst, const void *src, int c, sz_t bc)
 {
 	register char *d;
@@ -79,6 +84,7 @@ void *_memccpy(void *dst, const void *src, int c, sz_t bc)
 			return d;
 	return NULL;
 }
+
 void *_memxswp(void *mm0, void *mm1, sz_t bc)
 {
 #define L sizeof(long)
@@ -92,6 +98,7 @@ void *_memxswp(void *mm0, void *mm1, sz_t bc)
 	return mm0;
 #undef L
 }
+
 void *_memswp(void *mm0, void *mm1, sz_t bc)
 {
 	void *buf;
@@ -106,6 +113,7 @@ void *_memswp(void *mm0, void *mm1, sz_t bc)
 	}
 	return NULL;
 }
+
 void *_memdup(const void *mm, sz_t bc)
 {
 	void *m;
@@ -116,8 +124,8 @@ void *_memdup(const void *mm, sz_t bc)
 	return m;
 }
   
-//string functions (see details in string.h)
-//copy/cat
+/* string functions (see details in string.h) */
+/* copy/cat */
 char *_strcpy(char *dst, const char *src)
 {
 	register char *d;
@@ -126,6 +134,7 @@ char *_strcpy(char *dst, const char *src)
 		;
 	return dst;
 }
+
 char *_strncpy(char *dst, const char *src, sz_t bc)
 {
 	register char *d;
@@ -137,12 +146,14 @@ char *_strncpy(char *dst, const char *src, sz_t bc)
 		*d++ = '\0';
 	return dst;
 }
+
 char *_stpcpy(char *dst, const char *src)
 {
 	while (*dst = *src++)
 		dst++;
 	return dst;
 }
+
 char *_stpncpy(char *dst, const char *src, sz_t bc)
 {
 	char *d;
@@ -156,6 +167,7 @@ char *_stpncpy(char *dst, const char *src, sz_t bc)
 		*dst++ = '\0';
 	return d;
 }
+
 char *_strcat(char *dst, const char *src)
 {
 	register char *d;
@@ -167,6 +179,7 @@ char *_strcat(char *dst, const char *src)
 		;
 	return dst;
 }
+
 char *_strncat(char *dst, const char *src, sz_t bc)
 {
 	register char *d;
@@ -180,7 +193,7 @@ char *_strncat(char *dst, const char *src, sz_t bc)
 	return dst;
 }
 
-//len
+/* len */
 sz_t _strlen(const char *str)
 {
 	register sz_t l;
@@ -189,6 +202,7 @@ sz_t _strlen(const char *str)
 		;
 	return l;
 }
+
 sz_t _strnlen(const char *str, sz_t bc)
 {
 	register sz_t l;
@@ -198,7 +212,7 @@ sz_t _strnlen(const char *str, sz_t bc)
 	return l;
 }
 
-//find
+/* find */
 char *_strchr(const char *str, int c)
 {
 	for (; *str; str++)
@@ -206,6 +220,7 @@ char *_strchr(const char *str, int c)
 			return str;
 	return NULL;
 }
+
 char *_strrchr(const char *str, int c)
 {
 	register sz_t l;
@@ -215,12 +230,14 @@ char *_strrchr(const char *str, int c)
 			return str;
 	return NULL;
 }
+
 char *_strchrnul(const char *str, int c)
 {
 	for (; *str && *str!=c; str++)
 		;
 	return str;
 }
+
 sz_t _strcspn(const char *dst, const char *src)
 {
 	register sz_t l;
@@ -232,6 +249,7 @@ sz_t _strcspn(const char *dst, const char *src)
 				return l;
 	return l;
 }
+
 sz_t _strspn(const char *dst, const char *src)
 {
 	register sz_t l;
@@ -243,6 +261,7 @@ sz_t _strspn(const char *dst, const char *src)
 				return l;
 	return l;
 }
+
 char *_strpbrk(const char *dst, const char *src)
 {
 	register const char *s;
@@ -253,6 +272,7 @@ char *_strpbrk(const char *dst, const char *src)
 				return dst;
 	return NULL;
 }
+
 /* 
  * only O(N2)
  */
@@ -272,7 +292,7 @@ char *_strstr(const char *dst, const char *src)
 	return NULL;
 }
 
-//compare
+/* compare */
 int _strcmp(const char *s0, const char *s1)
 {
 	for (; *s0 == *s1; s0++, s1++)
@@ -280,6 +300,7 @@ int _strcmp(const char *s0, const char *s1)
 			return 0;
 	return *s0 - *s1;
 }
+
 int _strncmp(const char *s0, const char *s1, sz_t bc)
 {
 	for (; *s0 == *s1 && bc--; s0++, s1++)
@@ -288,7 +309,7 @@ int _strncmp(const char *s0, const char *s1, sz_t bc)
 	return *s0 - *s1;
 }
 
-//reverse
+/* reverse */
 char *_strrev(char *str)
 {
 	register sz_t l, i;
@@ -301,6 +322,7 @@ char *_strrev(char *str)
 	}
 	return str;
 }
+
 char *_strnrev(char *str, sz_t bc)
 {
 	register sz_t l, i;
@@ -314,7 +336,7 @@ char *_strnrev(char *str, sz_t bc)
 	return str;
 }
 
-//set each char
+/* set each char */
 char *_strset(char *str, int c)
 {
 	register char *s;
@@ -323,6 +345,7 @@ char *_strset(char *str, int c)
 		*s = c;
 	return str;
 }
+
 char *_strnset(char *str, int c, sz_t bc)
 {
 	register char *s;
@@ -332,7 +355,7 @@ char *_strnset(char *str, int c, sz_t bc)
 	return str;
 }
 
-//alloc
+/* alloc */
 char *_strdup(const char *str)
 {
 	char *s;
@@ -342,6 +365,7 @@ char *_strdup(const char *str)
 		_strcpy(s, str);
 	return s;
 }
+
 char *_strndup(const char *str, sz_t bc)
 {
 	register sz_t l;
