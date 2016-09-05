@@ -1,8 +1,13 @@
+/*
+ * hash table
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #include <stdlib.h>
 #include "_stddef.h"
 #include "_htbl.h"
 
-//alloc/dealloc
+/* alloc */
 int mk_ht(struct htbl *ht)
 {
 	ht->ht = malloc(ht->len * sizeof(void *));
@@ -10,6 +15,8 @@ int mk_ht(struct htbl *ht)
 		return 0;
 	return -1;
 }
+
+/* dealloc */
 void rm_ht(struct htbl *ht)
 {
 	register void **cl;      //current list
@@ -26,7 +33,7 @@ void rm_ht(struct htbl *ht)
 	ht->len = ht->cnt = 0;
 }
 
-//add node
+/* add node */
 void *add_nodeh(struct htbl *ht, void *data)
 {
 	unsigned int h;
@@ -45,7 +52,7 @@ void *add_nodeh(struct htbl *ht, void *data)
 	return new;
 }
 
-//rm_node
+/* rm_node */
 void rm_nodeh(struct htbl *ht, void *data)
 {
 	unsigned int h;
@@ -64,7 +71,7 @@ void rm_nodeh(struct htbl *ht, void *data)
 		}
 }
 
-//find node
+/* find node */
 void *fnd_nodeh(const struct htbl *ht,const void *data)
 {
 	register void *cur;
@@ -75,7 +82,7 @@ void *fnd_nodeh(const struct htbl *ht,const void *data)
 	return cur;
 }
 
-//apply
+/* apply */
 void appl_ht(const struct htbl *ht, void (*fun)(void *, void *), void *arg)
 {
 	register void **cl;
