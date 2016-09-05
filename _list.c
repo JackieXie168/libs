@@ -1,7 +1,12 @@
+/*
+ * single-linked list
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #include "_stddef.h"
 #include "_list.h"
 
-//add
+/* add to head */
 void *add_head(struct list *ls, void *data)
 {
 	void *newh;
@@ -13,6 +18,8 @@ void *add_head(struct list *ls, void *data)
 	}
 	return newh;
 }
+
+/* add to tail */
 void *add_tail(struct list *ls, void *data)
 {
 	void *newt;
@@ -28,6 +35,8 @@ void *add_tail(struct list *ls, void *data)
 		;
 	return next(cur, ls->off) = newt;
 }
+
+/* add by index */
 void *add_pos(struct list *ls, void *data, unsigned int pos)
 {
 	void *new;
@@ -48,7 +57,7 @@ void *add_pos(struct list *ls, void *data, unsigned int pos)
 	return next(cur, ls->off) = new;
 }
 
-//rm
+/* remove from head */
 void rm_head(struct list *ls)
 {
 	void *newh;
@@ -60,6 +69,8 @@ void rm_head(struct list *ls)
 	ls->head = newh;
 	ls->cnt--;
 }
+
+/* remove from tail */
 void rm_tail(struct list *ls)
 {
 	register void *cur;
@@ -77,6 +88,8 @@ void rm_tail(struct list *ls)
 	next(cur, ls->off) = NULL;
 	ls->cnt--;
 }
+
+/* remove by index */
 void rm_pos(struct list *ls, unsigned int pos)
 {
 	register void *cur;
@@ -97,6 +110,8 @@ void rm_pos(struct list *ls, unsigned int pos)
 	next(cur, ls->off) = nxt;
 	ls->cnt--;
 }
+
+/* remove first match by data */
 void rm_node(struct list *ls, void *data)
 {
 	register void *prv, *cur;
@@ -113,6 +128,8 @@ void rm_node(struct list *ls, void *data)
 			return;
 		}
 }
+
+/* remove all match by data */
 void rm_nodes(struct list *ls, void *data)
 {
 	register void *prv, *cur;
@@ -130,6 +147,8 @@ void rm_nodes(struct list *ls, void *data)
 	if (!ls->cmp(ls->head, data))
 		rm_head(ls); 
 }
+
+/* remove all */
 void rm_ls(struct list *ls)
 {
 	register void *cur, *nxt;
@@ -142,7 +161,7 @@ void rm_ls(struct list *ls)
 	ls->cnt = 0;
 }
 
-//find
+/* find tail */
 void *fnd_tail(const struct list *ls)
 {
 	register void *cur;
@@ -154,6 +173,8 @@ void *fnd_tail(const struct list *ls)
 		;
 	return cur;
 }
+
+/* find by index */
 void *fnd_pos(const struct list *ls, unsigned int pos)
 {
 	register void *cur;
@@ -164,6 +185,8 @@ void *fnd_pos(const struct list *ls, unsigned int pos)
 		;
 	return cur;
 }
+
+/* find first match by data */
 void *fnd_node(const struct list *ls, const void *data)
 {
 	register void *cur;
@@ -174,7 +197,7 @@ void *fnd_node(const struct list *ls, const void *data)
 	return NULL;
 }
 
-//apply to each
+/* apply function to each */
 void appl_ls(const struct list *ls, void (*fun)(void *, void *), void *arg)
 {
 	register void *cur;

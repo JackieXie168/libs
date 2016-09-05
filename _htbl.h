@@ -3,7 +3,7 @@
 
 #include "_stddef.h"
 
-//main hash table data structure
+/* main hash table data structure */
 struct htbl{
 	void **ht;
 	unsigned int len, cnt;
@@ -15,23 +15,23 @@ struct htbl{
 	unsigned int (*hash)(const void *);
 };
 
-//byte offset between node start and pointer to next node
+/* byte offset between node start and pointer to next node */
 #define next(cur, off) (*(void **)((char *)cur + off))
 
-//alloc/dealloc
+/* alloc/dealloc */
 int mk_ht(struct htbl *ht);
 void rm_ht(struct htbl *ht);
 
-//add
+/* add */
 void *add_nodeh(struct htbl *ht, void *data);
 
-//rm
+/* remove */
 void rm_nodeh(struct htbl *ht, void *data);
 
-//find
+/* find */
 void *fnd_nodeh(const struct htbl *ht, const void *data);
 
-//apply
+/* apply */
 void appl_ht(const struct htbl *ht, void (*fun)(void *,void *), void *arg);
 
 #endif

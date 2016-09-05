@@ -1,7 +1,12 @@
+/*
+ * double-linked list
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #include "_stddef.h"
 #include "_listb.h"
 
-//add
+/* add to head */
 void *add_headb(struct listb *ls, void *data)
 {
 	void *newh;
@@ -16,6 +21,8 @@ void *add_headb(struct listb *ls, void *data)
 		ls->tail = newh;
 	return ls->head = newh;
 }
+
+/* add to tail */
 void *add_tailb(struct listb *ls, void *data)
 {
 	void *newt;
@@ -30,6 +37,8 @@ void *add_tailb(struct listb *ls, void *data)
 		ls->head = newt;
 	return ls->tail = newt;
 }
+
+/* add by index */
 void *add_posb(struct listb *ls, void *data, unsigned int pos)
 {
 	register void *cur;
@@ -66,7 +75,7 @@ void *add_posb(struct listb *ls, void *data, unsigned int pos)
 	return nextb(cur, off0) = nextb(nextb(new, off0), off1) = new;
 }
 
-//rm
+/* remove head */
 void rm_headb(struct listb *ls)
 {
 	void *newh;
@@ -82,6 +91,8 @@ void rm_headb(struct listb *ls)
 	else
 		ls->tail = NULL;
 }
+
+/* remove tail */
 void rm_tailb(struct listb *ls)
 {
 	void *newt;
@@ -97,6 +108,8 @@ void rm_tailb(struct listb *ls)
 	else
 		ls->head = NULL;
 }
+
+/* remove by index */
 void rm_posb(struct listb *ls, unsigned int pos)
 {
 	register void *cur;
@@ -135,6 +148,8 @@ void rm_posb(struct listb *ls, unsigned int pos)
 	nextb(cur, off0) = nxt;
 	nextb(nxt, off1) = cur;
 }
+
+/* remove first match by data */
 void rm_nodeb(struct listb *ls, void *data)
 {
 	register void *cur;
@@ -154,6 +169,8 @@ void rm_nodeb(struct listb *ls, void *data)
 			return;
 		}
 }
+
+/* remove all match by data */
 void rm_nodesb(struct listb *ls, void *data)
 {
 	register void *cur, *nxt;
@@ -174,6 +191,8 @@ void rm_nodesb(struct listb *ls, void *data)
 	if (!ls->cmp(ls->head, data))
 		rm_headb(ls);
 }
+
+/* remove all */
 void rm_lsb(struct listb *ls)
 {
 	register void *cur, *nxt;
@@ -186,7 +205,7 @@ void rm_lsb(struct listb *ls)
 	ls->head = ls->tail = NULL;
 }
 
-//find
+/* find by index */
 void *fnd_posb(const struct listb *ls, unsigned int pos)
 {
 	register void *cur;
@@ -206,6 +225,8 @@ void *fnd_posb(const struct listb *ls, unsigned int pos)
 		;
 	return cur;
 }
+
+/* find by data */
 void *fnd_nodeb(const struct listb *ls, const void *data)
 {
 	register void *cur;
@@ -216,7 +237,7 @@ void *fnd_nodeb(const struct listb *ls, const void *data)
 	return NULL;
 }
 
-//apply
+/* apply function to each */
 void appl_lsb(const struct listb *ls, void (*fun)(void *, void *), void *arg)
 {
 	register void *cur;
