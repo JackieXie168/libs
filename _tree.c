@@ -1,7 +1,12 @@
+/*
+ * binary tree
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #include "_stddef.h"
 #include "_tree.h"
 
-//add
+/* add node */
 void *add_nodet(struct tree *tr, void *data)
 {
 	register void **cur;
@@ -19,7 +24,7 @@ void *add_nodet(struct tree *tr, void *data)
 	return *cur;
 }
 
-//rm
+/* remove node */
 void rm_nodet(struct tree *tr, void *data)
 {
 	register void **cur;
@@ -44,6 +49,8 @@ void rm_nodet(struct tree *tr, void *data)
 	} else
 		*cur = r;
 }
+
+/* remove tree */
 void rm_tr(struct tree *tr)
 {
 	register void *root;
@@ -59,7 +66,7 @@ void rm_tr(struct tree *tr)
 	tr->cnt--; //or tr->cnt=0
 }
 
-//find
+/* find */
 void *fnd_nodet(const struct tree *tr, const void *data)
 {
 	register void *cur;
@@ -70,7 +77,7 @@ void *fnd_nodet(const struct tree *tr, const void *data)
 	return cur;
 }
 
-//apply
+/* apply function to each */
 void appl_tr(struct tree *tr, void (*fun)(void *, void *), void *arg)
 {
 	register void *root;

@@ -6,7 +6,7 @@
 #include <stdlib.h>  //malloc
 #include "_string.h"
 
-//generic memory functions (see details in string.h)
+/* generic memory functions (see details in string.h) */
 void *_memset(void *mm, int c, sz_t bc)
 {
 	register char *m;

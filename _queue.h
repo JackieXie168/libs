@@ -1,3 +1,8 @@
+/*
+ * queue
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #ifndef _QUEUE_H
 #define _QUEUE_H
 

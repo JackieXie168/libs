@@ -1,3 +1,8 @@
+/*
+ * stack
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include "_stddef.h"

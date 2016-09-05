@@ -1,3 +1,8 @@
+/*
+ * stack
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #ifndef _STACK_H
 #define _STACK_H
 

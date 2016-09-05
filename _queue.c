@@ -1,3 +1,8 @@
+/*
+ * queue
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #include <stdlib.h>
 #include "_stddef.h"
 #include "_string.h"
