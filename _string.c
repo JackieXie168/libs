@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2015  Stanislav Gubin
  */
-#include <stdlib.h>  //malloc
+#include <stdlib.h>	/* malloc */
 #include "_string.h"
 
 /* generic memory functions (see details in string.h) */
@@ -64,7 +64,7 @@ void *_memmove(void *dst, const void *src, sz_t bc)
 			*(long*)(d -= L) = *(long*)(s -= L);
 		for (bc &= L - 1; bc--; )
 			*--d = *--s;
-	}else{
+	} else {
 		for (; c--; d += L, s += L)
 			*(long*)d = *(long*)s;
 		for (bc &= L - 1; bc--; d++, s++)

@@ -8,7 +8,7 @@
 
 #include "_stddef.h"
 
-//stack main structure
+/* stack main structure */
 struct stack {
 	void *base, *end, *top;
 	sz_t off;
@@ -17,19 +17,19 @@ struct stack {
 	unsigned int rc;
 };
 
-//alloc/dealloc
+/* alloc/dealloc */
 int mk_st(struct stack *st, unsigned int cnt);
 void rm_st(struct stack *st);
 
-//logic
+/* logic */
 int push_st(struct stack *st, void *data);
 void *pop_st(struct stack *st);
 
-//find
+/* find */
 void *fnd_st(const struct stack *st, const void *data);
 void *fndr_st(const struct stack *st, const void *data);
 
-//apply
+/* apply function to each */
 void appl_st(const struct stack *st, void (*fun)(void *, void *), void *arg);
 void applr_st(const struct stack *st, void (*fun)(void *, void *), void *arg);
 

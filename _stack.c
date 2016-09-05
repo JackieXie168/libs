@@ -8,7 +8,7 @@
 #include "_stddef.h"
 #include "_stack.h"
 
-//alloc/dealloc
+/* alloc/dealloc */
 int mk_st(struct stack *st, unsigned int cnt)
 {
 	sz_t bc;
@@ -21,19 +21,20 @@ int mk_st(struct stack *st, unsigned int cnt)
 	}
 	return -1;
 }
+
 void rm_st(struct stack *st)
 {
 	free(st->base);
 	st->top = st->end = st->base = NULL;
 }
 
-//add
+/* add */
 int push_st(struct stack *st, void *data)
 {
 	sz_t bc, tc;
 	char *newb;
 	
-	//try realloc if full
+	/* try realloc if full */
 	if (st->top == st->end) {
 		bc = ((char*)st->end - (char*)st->base) * st->rc;
 		tc = (char*)st->top - (char*)st->base;
@@ -44,7 +45,7 @@ int push_st(struct stack *st, void *data)
 		st->top = newb + tc;
 		st->base = newb;
 	}
-	//try add
+	/* try add */
 	if (!st->cp(st->top, data)) {
 		st->top = (char*)st->top + st->off;
 		return 0;
@@ -52,7 +53,7 @@ int push_st(struct stack *st, void *data)
 	return -1;
 }
 
-//add
+/* get */
 void *pop_st(struct stack *st)
 {
 	if (st->top != st->base)
@@ -60,7 +61,7 @@ void *pop_st(struct stack *st)
 	return NULL;
 }
 
-//find
+/* find */
 void *fnd_st(const struct stack *st, const void *data)
 {
 	register char *cur;
@@ -70,6 +71,7 @@ void *fnd_st(const struct stack *st, const void *data)
 			return cur;
 	return NULL;
 }
+
 void *fndr_st(const struct stack *st, const void *data)
 {
 	register char *cur;
@@ -80,7 +82,7 @@ void *fndr_st(const struct stack *st, const void *data)
 	return NULL;
 }
 
-//apply
+/* apply */
 void appl_st(const struct stack *st, void (*fun)(void *, void *), void *arg)
 {
 	register char *cur;
@@ -88,6 +90,7 @@ void appl_st(const struct stack *st, void (*fun)(void *, void *), void *arg)
 	for (cur = st->top; cur != st->base; )
 		fun(cur -= st->off, arg);
 }
+
 void applr_st(const struct stack *st, void (*fun)(void *, void *), void *arg)
 {
 	register char *cur;

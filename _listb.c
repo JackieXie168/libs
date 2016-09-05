@@ -52,13 +52,13 @@ void *add_posb(struct listb *ls, void *data, unsigned int pos)
 		return add_tailb(ls, data);
 	if (pos > ls->cnt)
 		return NULL;
-	//try alloc (no need loop if fail)
-	new = ls->mk_node(data, NULL, NULL); //NULL is temporary
+	/* try alloc (no need loop if fail) */
+	new = ls->mk_node(data, NULL, NULL); /* NULL is temporary */
 	if (new == NULL)
 		return NULL;
 	ls->cnt++;
-	//choose best way to go
-	if (pos < (ls->cnt >> 1)){
+	/* choose best way to go */
+	if (pos < (ls->cnt >> 1)) {
 		cur = ls->head;
 		off0 = ls->noff;
 		off1 = ls->poff;
@@ -130,7 +130,7 @@ void rm_posb(struct listb *ls, unsigned int pos)
 	if (pos >= ls->cnt)
 		return;
 	ls->cnt--;
-	//choose best way to go
+	/* choose best way to go */
 	if (pos < (ls->cnt >> 1)) {
 		cur = ls->head;
 		off0 = ls->noff;

@@ -63,7 +63,7 @@ void rm_tr(struct tree *tr)
 	tr->root = right(root, tr->roff);
 	rm_tr(tr);
 	tr->free_node(root);
-	tr->cnt--; //or tr->cnt=0
+	tr->cnt--; /* or tr->cnt = 0 */
 }
 
 /* find */

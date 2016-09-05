@@ -8,7 +8,7 @@
 #include "_string.h"
 #include "_queue.h"
 
-//alloc/dealloc
+/* alloc/dealloc */
 int mk_qu(struct queue *q, unsigned int cnt)
 {
 	sz_t bc;
@@ -22,13 +22,14 @@ int mk_qu(struct queue *q, unsigned int cnt)
 	}
 	return -1;
 }
+
 void rm_qu(struct queue *q)
 {
 	free(q->base);
 	q->head = q->tail = q->end = q->base = NULL;
 }
 
-//add
+/* add */
 int push_qu(struct queue *q, void *data)
 {
 	if (q->tail == q->end) {
@@ -71,7 +72,7 @@ int push_qu(struct queue *q, void *data)
 	return -1;
 }
 
-//get
+/* get */
 void *pop_qu(struct queue *q)
 {
 	void *ret;
@@ -87,7 +88,7 @@ void *pop_qu(struct queue *q)
 	return ret;
 }
 
-//find
+/* find */
 void *fnd_qu(const struct queue *q, const void *data)
 {
 	register char *cur;
@@ -106,6 +107,7 @@ void *fnd_qu(const struct queue *q, const void *data)
 			return cur;
 	return NULL;
 }
+
 void *fndr_qu(const struct queue *q, const void *data)
 {
 	register char *cur;
@@ -125,7 +127,7 @@ void *fndr_qu(const struct queue *q, const void *data)
 	return NULL;
 }  
 
-//apply
+/* apply function to each */
 void appl_qu(const struct queue *q, void (*fun)(void *, void *), void *arg)
 {
 	register char *cur;
@@ -141,6 +143,7 @@ void appl_qu(const struct queue *q, void (*fun)(void *, void *), void *arg)
 	for (; cur != q->tail; cur += q->off)
 		fun(cur, arg);
 }
+
 void applr_qu(const struct queue *q, void (*fun)(void *, void *), void *arg)
 {
 	register char *cur;

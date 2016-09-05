@@ -46,8 +46,8 @@ void *add_pos(struct list *ls, void *data, unsigned int pos)
 		return add_head(ls, data);
 	if (pos > ls->cnt)
 		return NULL;
-	//try alloc (no need loop if fail)
-	new = ls->mk_node(data, NULL); //NULL is temporary
+	/* try alloc (no need loop if fail) */
+	new = ls->mk_node(data, NULL); /* NULL is temporary */
 	if (new == NULL)
 		return NULL;
 	ls->cnt++;

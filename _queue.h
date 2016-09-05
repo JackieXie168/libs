@@ -8,7 +8,7 @@
 
 #include "_stddef.h"
 
-//queue main structure
+/* queue main structure */
 struct queue {
 	void *base, *end, *head, *tail;
 	sz_t off;
@@ -17,19 +17,19 @@ struct queue {
 	unsigned int rc;
 };
 
-//alloc/dealloc
+/* alloc/dealloc */
 int mk_qu(struct queue *q, unsigned int cnt);
 void rm_qu(struct queue *q);
 
-//logic
+/* logic */
 int push_qu(struct queue *q, void *data);
 void *pop_qu(struct queue *q);
 
-//find
+/* find */
 void *fnd_qu(const struct queue *q, const void *data);
 void *fndr_qu(const struct queue *q, const void *data);
 
-//apply
+/* apply function to each */
 void appl_qu(const struct queue *q, void (*fun)(void *, void *), void *arg);
 void applr_qu(const struct queue *q ,void (*fun)(void *, void *), void *arg);
 

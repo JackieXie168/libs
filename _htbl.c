@@ -19,9 +19,9 @@ int mk_ht(struct htbl *ht)
 /* dealloc */
 void rm_ht(struct htbl *ht)
 {
-	register void **cl;      //current list
+	register void **cl;		/* current list */
 	register unsigned int i;
-	register void *cn, *nxt;  //current node
+	register void *cn, *nxt;	/* current node */
 	
 	for (i = ht->len, cl = ht->ht; i--; cl++)
 		for (cn = *cl; cn != NULL; cn = nxt) {
