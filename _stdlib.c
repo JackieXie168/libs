@@ -15,9 +15,10 @@ void *_lsearch(const void *key, const void *mm, sz_t n, sz_t size,
 //sort
 void _qsort(void *mm, sz_t n, sz_t sz, int (*cmp)(const void *, const void *))
 {
+	register char *cur, *top, *end;
+
 	if (n <= 1)
 		return;
-	register char *cur, *top, *end;
 	_memswp(mm, (char *)mm + rand() % n * sz, sz);
 	for (top = mm, cur = top + sz, end = top + sz * n; cur != end; cur += sz)
 		if (cmp(cur, mm) < 0)
