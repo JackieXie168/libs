@@ -1,3 +1,8 @@
+/*
+ * string.h
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #ifndef __STRING_H
 #define __STRING_H
 

@@ -1,3 +1,8 @@
+/*
+ * string.h implementation
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #include <stdlib.h>  //malloc
 #include "_string.h"
 
