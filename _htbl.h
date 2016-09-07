@@ -1,3 +1,8 @@
+/*
+ * hash table
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #ifndef _HTBL_H
 #define _HTBL_H
 

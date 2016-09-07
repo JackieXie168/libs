@@ -1,3 +1,8 @@
+/*
+ * single-linked list
+ *
+ * Copyright (C) 2015  Stanislav Gubin
+ */
 #ifndef _LIST_H
 #define _LIST_H
 
