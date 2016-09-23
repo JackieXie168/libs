@@ -2,4 +2,3 @@
 * add gap buffer (_gap.{c,h});
 * add rope (_rope.{c,h});
 * add red-black tree (_rbtr.{c,h});
-* add Makefile.
