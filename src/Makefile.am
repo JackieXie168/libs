@@ -13,7 +13,7 @@ libcustl_la_SOURCES = \
 	_string.c \
 	_tree.c
 
-libcustl_la_LIBADD = $(top_srcdir)/nvram/libdniutils-1.0.la
+#libcustl_la_LIBADD = $(top_srcdir)/nvram/libdniutils-1.0.la
 
 #DISTCLEANFILES = Makefile.in
 CLEANFILES = *~ *.log
