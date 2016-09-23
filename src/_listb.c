@@ -112,7 +112,7 @@ void rm_tailb(struct listb *ls)
 /* remove by index */
 void rm_posb(struct listb *ls, unsigned int pos)
 {
-	register void *cur;
+	register void *cur, *nxt;
 	register sz_t off0;
 	sz_t off1;
 	void *new;
