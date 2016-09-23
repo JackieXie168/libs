@@ -34,8 +34,9 @@ void _qsort(void *mm, sz_t n, sz_t sz, int (*cmp)(const void *, const void *))
 }
 
 /* binary search */
-void *bsearch(const void *key, const void *mm, sz_t n, sz_t bc, int (*cmp)(const void *, const void *))
+void *_bsearch(const void *key, const void *mm, sz_t n, sz_t bc, int (*cmp)(const void *, const void *))
 {
+	register char *cur;
 	register sz_t l, h, m;
 	register int c;
 
