@@ -6,7 +6,7 @@ SUBDIRS = src include
 EXTRA_DIST = doc/*.pdf doc/doxygen doc/doxygen-private patterns/*
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libcustl.pc
+pkgconfig_DATA = libustdc.pc
 
 doc/doxygen:
 	@mkdir -p $(builddir)/$@

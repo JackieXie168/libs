@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.60])
-AC_INIT([libcustl], [0.0.1], [jackie.CPlusPlus@gmail.com], [https://github.com/JackieXie168])
+AC_INIT([libustdc], [0.0.1], [jackie.CPlusPlus@gmail.com], [https://github.com/JackieXie168])
 AC_CONFIG_SRCDIR([src/_list.c])
 AC_CONFIG_HEADERS([include/config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -141,7 +141,7 @@ AM_COND_IF([NON_LINUX],
 
 ##################### FINAL CONFIGURATION ######################################
 # Configure makefiles
-AC_CONFIG_FILES([libcustl.pc
+AC_CONFIG_FILES([libustdc.pc
                  Makefile
                  src/Makefile
                  include/Makefile
